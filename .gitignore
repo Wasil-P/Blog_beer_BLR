@@ -1,0 +1,10 @@
+.venv
+.idea
+_pycache_
+Blog/__pycache__/
+beer_BLR/__pycache__/
+beer_BLR/api/__pycache__/
+Talks/__pycache__/
+Folklore/__pycache__/
+users/__pycache__/
+templates/__pycache__/
