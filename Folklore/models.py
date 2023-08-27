@@ -1,5 +1,15 @@
 from django.db import models
 
+class Category(models.Model):
+    """Мадэль для катэгорыі (віда) твора фальклору
+
+    A model of a category (type) of a folklore work"""
+    # PROVERB = "Proverb"
+    # RIDDLE = "Riddle"
+    # SONG = "Song, an excerpt of a song"
+    # RITE = "Rite"
+    name = models.CharField(max_length=100)
+
 
 class Folklore(models.Model):
     """Мадэль для адлюстравання твораў фальклору, урыўкаў
@@ -12,13 +22,6 @@ class Folklore(models.Model):
     link = models.TextField(max_length=256)
 
 
-class Category(models.Model):
-    """Мадэль для катэгорыі (віда) твора фальклору
-
-    A model of a category (type) of a folklore work"""
-    name = models.CharField(max_length=100)
-
-
 class Comments(models.Model):
     """Мадэль для каментара пад творамі фальклору
 
@@ -27,3 +30,6 @@ class Comments(models.Model):
     username = models.CharField(max_length=100)
     content = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.created.strftime('%d.%m.%Y %H:%M')

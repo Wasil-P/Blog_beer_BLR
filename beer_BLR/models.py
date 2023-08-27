@@ -1,5 +1,5 @@
 from django.db import models
-from ya_storage.storage import yandex_disk_storage
+# from ya_storage.storage import yandex_disk_storage
 
 
 class Technology(models.Model):
@@ -13,9 +13,12 @@ class Technology(models.Model):
     """
     name = models.CharField(max_length=100)
     # Пакуль не ведаю, як гэта рэалізаваць
-    location = models.locationField
-    photo = models.ImageField(null=False, upload_to="history/", storage=yandex_disk_storage)
+    # location = models.LocationField()
+    photo = models.ImageField(null=True, upload_to="history/")
     description = models.TextField(max_length=10_000)
+
+    class Meta():
+        db_table = "technologies"
 
 
 class News(models.Model):
@@ -23,18 +26,20 @@ class News(models.Model):
 
     In this model, the description of the news for the blog"""
     name = models.CharField(max_length=100)
-    photo = models.ImageField(null=False, upload_to="blog/", storage=yandex_disk_storage)
+    photo = models.ImageField(null=True, upload_to="blog/")
     created = models.DateTimeField(auto_now_add=True)
     description = models.TextField(max_length=5_000)
     tags = models.ManyToManyField("Tag", related_name="news")
 
+    def __str__(self):
+        return self.created.strftime('%d.%m.%Y %H:%M')
 
 class Recipes(models.Model):
     """У дадзенай мадэлі апісанне рэцэпта піва канкрэтнай тэхналогіі
 
     This model describes the beer recipe of a specific technology"""
     name = models.CharField(max_length=100)
-    photo = models.ImageField(null=False, upload_to="recipes/", storage=yandex_disk_storage)
+    photo = models.ImageField(null=True, upload_to="recipes/")
     description = models.TextField(max_length=5_000)
 
 
@@ -44,10 +49,13 @@ class Experience(models.Model):
     This model describes the experience of brewing beer according to a traditional recipe of a specific user."""
     name = models.CharField(max_length=100)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="experience_user")
-    profile_picture = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="experience_pic")
-    photo = models.ImageField(null=False, upload_to="my_ experience/", storage=yandex_disk_storage)
+    photo = models.ImageField(null=True, upload_to="my_ experience/")
     description = models.TextField(max_length=5_000)
     tags = models.ManyToManyField("Tag", related_name="experience_tags")
+
+
+    class Meta():
+        db_table = "experiences"
 
 
 class Comments(models.Model):
@@ -58,6 +66,9 @@ class Comments(models.Model):
     username = models.CharField(max_length=100)
     content = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.created.strftime('%d.%m.%Y %H:%M')
 
 
 class Tag(models.Model):
