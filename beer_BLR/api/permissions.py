@@ -25,8 +25,9 @@ class IsOwnerOrAdminUserOrReadOnly(BasePermission):
 
         if (
                 request.method in ["PUT", "PATCH"]
-                and request.user.is_staff
                 and request.user.has_perm("beer_BLR.change_experience")
+                and request.user.is_staff
+                and obj.user == request.user
         ):
             return True
 
@@ -34,6 +35,7 @@ class IsOwnerOrAdminUserOrReadOnly(BasePermission):
                 request.method in ["DELETE"]
                 and request.user.is_staff
                 and request.user.has_perm("beer_BLR.delete_experience")
+                and obj.user == request.user
         ):
             return True
 
@@ -52,6 +54,7 @@ class IsAuthenticatedOrAdminUserOrReadOnly(BasePermission):
                 request.method in ["PUT", "PATCH"]
                 and request.user.is_staff
                 and request.user.has_perm("Talks.change_talks")
+                and obj.user == request.user
         ):
             return True
 

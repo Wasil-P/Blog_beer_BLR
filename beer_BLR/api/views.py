@@ -71,6 +71,8 @@ class OneCategoryTalksListAPIView(generics.ListAPIView):
     View all questions from users in a specific category.
     Ability to create new questions for a specific category by registered users"""
     serializer_class = OneCategoryTalksSerializer
+    lookup_url_kwarg = "category_id"
+    lookup_field = "id"
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
@@ -78,10 +80,12 @@ class OneCategoryTalksListAPIView(generics.ListAPIView):
             .order_by('category')
 
     def post(self, request, *args, **kwargs):
-        self.check_object_permissions(request, Talks)
-        Talks.objects.create()
-        serializer = self.get_serializer_class()(Talks)
+        category_id = kwargs.get('category_id')
+        category = Category.objects.get(id=category_id)
+        talks = Talks.objects.create(category=category, user=request.user, question=request.data)
+        serializer = self.get_serializer_class()(talks)
         return Response(serializer.data)
+
 
 class OneTalkListAPIView(generics.ListAPIView):
     """Прагляд адказаў па каанкрэтнаму пытанню. Магчымасць стварэння і рэдагавання адказаў зарэгістраванымі юзэрамі
@@ -90,16 +94,15 @@ class OneTalkListAPIView(generics.ListAPIView):
     serializer_class = OneTalkSerializer
     lookup_url_kwarg = "talks_id"
     lookup_field = "id"
-    # permission_classes = [IsAuthenticatedOrAdminUserOrReadOnly]
+    permission_classes = [IsAuthenticatedOrAdminUserOrReadOnly]
 
     def get_queryset(self):
         talks_id = self.kwargs.get(self.lookup_url_kwarg)
         return Message.objects.filter(talks__id=talks_id)
 
     def post(self, request, *args, **kwargs):
-        # self.check_object_permissions(request, Message)
         talks_id = kwargs.get('talks_id')
         talks = Talks.objects.get(id=talks_id)
-        message = Message.objects.create(talks=talks, user=request.user, description=request.data['description'])
+        message = Message.objects.create(talks=talks, user=request.user, description=request.data)
         serializer = self.get_serializer_class()(message)
         return Response(serializer.data)

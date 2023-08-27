@@ -13,6 +13,7 @@ class TechnologySerializer(serializers.ModelSerializer):
 
 
 class ExperienceSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username")
 
     class Meta:
         model = Experience
@@ -28,6 +29,8 @@ class CategoryTalksSerializer(serializers.ModelSerializer):
 
 
 class OneCategoryTalksSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username")
+    category = serializers.CharField(source="category.name")
 
     class Meta:
         model = Talks
@@ -36,6 +39,8 @@ class OneCategoryTalksSerializer(serializers.ModelSerializer):
 
 
 class OneTalkSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username")
+    talks = serializers.CharField(source="talks.question")
 
     class Meta:
         model = Message
