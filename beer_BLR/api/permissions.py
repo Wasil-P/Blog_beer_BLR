@@ -25,24 +25,25 @@ class IsOwnerOrAdminUserOrReadOnly(BasePermission):
 
         if (
                 request.method in ["PUT", "PATCH"]
-                and request.user.has_perm("beer_BLR.change_experience")
-                and request.user.is_staff
-                and obj.user == request.user
+                and (request.user.has_perm("beer_BLR.change_experience")
+                     and obj.user == request.user
+                     or request.user.is_staff)
         ):
             return True
 
         if (
                 request.method in ["DELETE"]
-                and request.user.is_staff
-                and request.user.has_perm("beer_BLR.delete_experience")
-                and obj.user == request.user
+                and (request.user.has_perm("beer_BLR.delete_experience")
+                     and obj.user == request.user
+                     or request.user.is_staff)
+
         ):
             return True
 
         return False
 
 
-class IsAuthenticatedOrAdminUserOrReadOnly(BasePermission):
+class IsOwnerOrAdminUserHasDeleteOrReadOnly(BasePermission):
     """Уласнік пытання мае права толькі на рэдагаванне, адміністратар і на рэдагаванне і на выдаленне
 
     The owner of the question has the right to edit only, the administrator both to edit and to delete"""

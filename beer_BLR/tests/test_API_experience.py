@@ -28,6 +28,7 @@ class TestAPI(APITestCase):
         User.objects.create_user(**user)
 
         user_own = User.objects.get(username='user_owner')
+        user_ = User.objects.get(username='user')
 
         cls.superuser = superuser
         cls.user_owner = user_owner
@@ -38,6 +39,12 @@ class TestAPI(APITestCase):
                       "description": "historycal_beer"}
 
         cls.experience = Experience.objects.create(**experience)
+
+        experience_2 = {"name": "my_beer",
+                      "user": user_,
+                      "description": "historycal_beer"}
+
+        cls.experience_2 = Experience.objects.create(**experience_2)
 
     @classmethod
     def tearDownClass(cls):
@@ -130,7 +137,7 @@ class TestAPI(APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
 
         # Method delete authorized Admin
-        resp = self.client.delete(reverse("one_experience_view", args=(self.experience.id,)),
+        resp = self.client.delete(reverse("one_experience_view", args=(self.experience_2.id,)),
                                   HTTP_AUTHORIZATION=f"Bearer {self.superuser_tokens.get('access')}",
                                   )
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)

@@ -6,7 +6,7 @@ from Talks.models import Talks, Category, Message
 from .serializers import TechnologySerializer, ExperienceSerializer, CategoryTalksSerializer, \
     OneCategoryTalksSerializer, OneTalkSerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrAdminUserOrReadOnly, \
-    IsAuthenticatedOrAdminUserOrReadOnly, IsAuthenticatedOrReadOnly
+    IsOwnerOrAdminUserHasDeleteOrReadOnly, IsAuthenticatedOrReadOnly
 
 
 class TechnologyListAPIView(generics.ListCreateAPIView):
@@ -109,7 +109,7 @@ class OneTalkListAPIView(generics.ListAPIView):
     serializer_class = OneTalkSerializer
     lookup_url_kwarg = "talks_id"
     lookup_field = "id"
-    permission_classes = [IsAuthenticatedOrAdminUserOrReadOnly]
+    permission_classes = [IsOwnerOrAdminUserHasDeleteOrReadOnly]
 
     def get_queryset(self):
         talks_id = self.kwargs.get(self.lookup_url_kwarg)
