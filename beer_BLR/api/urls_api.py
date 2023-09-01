@@ -11,7 +11,7 @@ urlpatterns = [
     path("my_experience/<int:experience_id>", views.OneExperienceAPIView.as_view(), name="one_experience_view"),
     path("talks/", views.CategoryTalksListAPIView.as_view()),
     path("talks/<int:category_id>", views.OneCategoryTalksListAPIView.as_view(), name="one_category_talks_view"),
-    path("talks/<int:category_id>/<int:talks_id>", views.OneTalkListAPIView.as_view, name="one_talk_list_view"),
+    path("talks/<int:category_id>/<int:talks_id>", views.OneTalkListAPIView.as_view(), name="one_talk_list_view"),
 
     path('token/', TokenObtainPairView.as_view(), name="api_token_obtain_pair"),
     path('token/refresh/', TokenRefreshView.as_view(), name="api_token_refresh")

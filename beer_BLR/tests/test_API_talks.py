@@ -5,7 +5,6 @@ import datetime
 
 from users.models import User
 from Talks.models import Talks, Category, Message
-from ..models import Experience
 
 
 class TestAPI(APITestCase):
@@ -109,6 +108,7 @@ class TestAPI(APITestCase):
     def test_one_talk_list_view(self):
         # Get method without authorization
 
-        resp = self.client.get("one_category_talks_view",
-                               kwargs={"category_id": self.category.id, "talks_id": self.talks.id})
+        resp = self.client.get(
+            reverse("one_talk_list_view",
+                    kwargs={"category_id": self.category.id, "talks_id": self.talks.id}))
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
