@@ -9,7 +9,7 @@ from django.urls import path
     category_show: display a specific category with questions
     question_show: display specific questions with messages"""
 urlpatterns = [
-    path("", name="all_categories"),
-    path("category/", name="category_show"),
-    path("category/<int:talks_id>", name="question_show")
+    # path("", name="all_categories"),
+    # path("category/", name="category_show"),
+    # path("category/<int:talks_id>", name="question_show")
 ]
