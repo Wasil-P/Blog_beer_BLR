@@ -6,7 +6,8 @@ from Talks.models import Talks, Category, Message
 from .serializers import TechnologySerializer, ExperienceSerializer, CategoryTalksSerializer, \
     OneCategoryTalksSerializer, OneTalkSerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrAdminUserOrReadOnly, \
-    IsOwnerOrAdminUserHasDeleteOrReadOnly, IsAuthenticatedOrReadOnly
+    IsAuthOrReadOnlyAndOwnerOrAdminChange, IsAuthenticatedOrReadOnlyAndIsOwnerOrAdminChange,\
+    IsAuthenticatedOrReadOnly
 
 
 class TechnologyListAPIView(generics.ListCreateAPIView):
@@ -87,7 +88,7 @@ class OneCategoryTalksListAPIView(generics.ListCreateAPIView):
     serializer_class = OneCategoryTalksSerializer
     lookup_url_kwarg = "category_id"
     lookup_field = "id"
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnlyAndIsOwnerOrAdminChange]
 
     def get_queryset(self):
         return Talks.objects.all()\
@@ -101,7 +102,7 @@ class OneCategoryTalksListAPIView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 
-class OneTalkListAPIView(generics.ListAPIView):
+class OneTalkListAPIView(generics.ListCreateAPIView):
     """Прагляд адказаў па каанкрэтнаму пытанню. Магчымасць стварэння і
     рэдагавання адказаў зарэгістраванымі юзэрамі
 
@@ -109,11 +110,12 @@ class OneTalkListAPIView(generics.ListAPIView):
     serializer_class = OneTalkSerializer
     lookup_url_kwarg = "talks_id"
     lookup_field = "id"
-    permission_classes = [IsOwnerOrAdminUserHasDeleteOrReadOnly]
+    permission_classes = [IsAuthOrReadOnlyAndOwnerOrAdminChange]
 
     def get_queryset(self):
         talks_id = self.kwargs.get(self.lookup_url_kwarg)
-        return Message.objects.filter(talks__id=talks_id)
+        category_id = Talks.objects.get(id=talks_id).category.id
+        return Message.objects.filter(talks__category__id=category_id, talks__id=talks_id)
 
     def post(self, request, *args, **kwargs):
         talks_id = kwargs.get('talks_id')

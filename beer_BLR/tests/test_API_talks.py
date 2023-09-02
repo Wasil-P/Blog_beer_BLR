@@ -54,6 +54,7 @@ class TestAPI(APITestCase):
 
         cls.category = category_
         cls.category_id = category_id
+        cls.talk_id = talk_id
         cls.created = created
         cls.talks = talk_
         cls.message = message_
@@ -99,12 +100,12 @@ class TestAPI(APITestCase):
                                     "question": "Where?"})
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
-
     """Праверка прагляду адказаў па каанкрэтнаму пытанню. Праверка магчымасці стварэння і
     рэдагавання адказаў зарэгістраванымі юзэрамі
     
     Check the answer view for a specific question. Checking the ability to create and
      editing of answers by registered users"""
+
     def test_one_talk_list_view(self):
         # Get method without authorization
 
@@ -112,3 +113,31 @@ class TestAPI(APITestCase):
             reverse("one_talk_list_view",
                     kwargs={"category_id": self.category.id, "talks_id": self.talks.id}))
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
+
+        # Method Post without authorization
+        user = User.objects.get(username='user')
+        resp = self.client.post(reverse("one_talk_list_view",
+                                        kwargs={"category_id": self.category.id, "talks_id": self.talks.id}),
+                                data={
+                                    "talks": self.talk_id,
+                                    "user": user.id,
+                                    "description": "Here!"})
+        self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        # Method Post authorized user
+        resp = self.client.post(reverse("one_talk_list_view",
+                                        kwargs={"category_id": self.category.id, "talks_id": self.talks.id}),
+                                HTTP_AUTHORIZATION=f"Bearer {self.user_tokens.get('access')}",
+                                data={
+                                    "talks": self.talk_id,
+                                    "user": user.id,
+                                    "description": "Here!"})
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+
+        # Method Patch authorized user, but not owner-user
+        resp = self.client.patch(reverse("one_talk_list_view",
+                                 kwargs={"category_id": self.category.id, "talks_id": self.talks.id, }),
+                                 HTTP_AUTHORIZATION=f"Bearer {self.user_tokens.get('access')}",
+                                 data={"message_id": self.message.id,
+                                       "description": "There!"})
+        self.assertEqual(resp.status_code, status.HTTP_403_FORBIDDEN)
