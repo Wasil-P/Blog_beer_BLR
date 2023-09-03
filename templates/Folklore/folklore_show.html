@@ -1,0 +1,47 @@
+{% extends "Folklore/base.html" %}
+{%load crispy_forms_tags %}
+
+{% block content %}
+    <span class="border border-warning border-4 fs-2 fw-bold" >
+        {{ folklore.description }}
+    </span>
+    <h8> Спасылка - {{ folklore.link }}</h8>
+
+        <div class="border border-success border-2 fs-2 w-25"> Каментары:
+        </div>
+            {% for comment in list_comments %}
+                <div class="container w-100" class="btn btn-info" style="box-shadow: 3px 3px #3db733">
+                    <a href="#" class="list-group-item list-group-item-action active fw-bold" aria-current="true">
+                                     Аўтар - {{ comment.username }}, Тэкст - {{ comment.content }},
+                        <h8 class="card-text" style="float: right" >
+                            Дата стварэння - {{ comment.created }}
+                        </h8>
+                     </a>
+                </div>
+            {% endfor %}
+
+
+    <div class="container w-50">
+        <a href="{% url 'comment_add' category.id folklore.id  %}">
+
+            <div>
+                <label>
+                Пакінуць каментар
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Стварыць</button>>
+
+                </label>
+            </div>
+        </a>
+
+        <a href="{% url 'category_show' category.id %}">
+
+            <div>
+                <label>
+                Вяртанне на папярэднюю старонку
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                </label>
+            </div>
+        </a>
+    </div>
+{% endblock %}

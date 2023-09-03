@@ -1,0 +1,31 @@
+{% extends "Folklore/base.html" %}
+{%load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container w-50">
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{form | crispy}}
+            <div>
+                <label>
+                    Адпраўка гатовага тэксту
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Адправіць</button>>
+                </label>
+            </div>
+        </form>
+
+        <a href="{% url 'folklore_show' category.id folklore.id %}">
+
+            <div>
+                <label>
+                Вяртанне на папярэднюю старонку
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                </label>
+            </div>
+        </a>
+    </div>
+{% endblock %}
