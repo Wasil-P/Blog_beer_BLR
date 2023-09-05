@@ -4,7 +4,7 @@ from django.shortcuts import reverse
 import datetime
 
 from users.models import User
-from Talks.models import Talks, Category, Message
+from ..models import Talks, Category, Message
 
 
 class TestAPI(APITestCase):
@@ -64,13 +64,13 @@ class TestAPI(APITestCase):
         super().tearDownClass()
 
     def setUp(self):
-        self.superuser_tokens = self.client.post("/api/token/", self.superuser).json()
-        self.user_owner_tokens = self.client.post("/api/token/", self.user_owner).json()
-        self.user_tokens = self.client.post("/api/token/", self.user).json()
+        self.superuser_tokens = self.client.post("/api/talks/token/", self.superuser).json()
+        self.user_owner_tokens = self.client.post("/api/talks/token/", self.user_owner).json()
+        self.user_tokens = self.client.post("/api/talks/token/", self.user).json()
 
     """Праверка магчымасці прагляду усіх пытанняў ад карыстальнікаў па канкрэтнай катэгорыі.
     Магчымасць ствараць новыя пытанні па канкрэтнай катэгорыі зарэгістраваным юзэрам
-    
+
     Check the possibility of viewing all questions from users in a specific category. 
     The ability to create new questions in a specific category is available to registered users."""
 
@@ -102,7 +102,7 @@ class TestAPI(APITestCase):
 
     """Праверка прагляду адказаў па каанкрэтнаму пытанню. Праверка магчымасці стварэння і
     рэдагавання адказаў зарэгістраванымі юзэрамі
-    
+
     Check the answer view for a specific question. Checking the ability to create and
      editing of answers by registered users"""
 
@@ -136,7 +136,7 @@ class TestAPI(APITestCase):
 
         # Method Patch authorized user, but not owner-user
         resp = self.client.patch(reverse("one_talk_list_view",
-                                 kwargs={"category_id": self.category.id, "talks_id": self.talks.id, }),
+                                         kwargs={"category_id": self.category.id, "talks_id": self.talks.id, }),
                                  HTTP_AUTHORIZATION=f"Bearer {self.user_tokens.get('access')}",
                                  data={"message_id": self.message.id,
                                        "description": "There!"})

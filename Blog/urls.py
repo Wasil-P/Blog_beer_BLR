@@ -24,6 +24,8 @@ urlpatterns = [
     path("blog/", include("beer_BLR.urls_blog")),
     path("folklore/", include("Folklore.urls_folklore")),
     path("talks/", include("Talks.urls_talks")),
-    path("api/", include("beer_BLR.api.urls_api")),
+    #API_____________________________________________________
+    path("api/blog/", include("beer_BLR.api.urls_api")),
+    path("api/talks/", include("Talks.api.urls_api")),
     path('api-auth/', include('rest_framework.urls'))
 ]

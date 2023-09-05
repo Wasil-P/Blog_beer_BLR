@@ -12,45 +12,45 @@ class TestJWTAuth(APITestCase):
             password="567gjtfi7yuilgh78",
             email="user@mail.com",
         )
-        print(cls.user)
-        print(type(cls.user))
+
 
     @classmethod
     def tearDownClass(cls):
         super().tearDownClass()
 
         """Праверка атрымання access- и refresh- токена
+        
             Checking access and refresh token receipt"""
     def test_get_token_valid(self):
-        resp = self.client.post("/api/token/",
+        resp = self.client.post("/api/talks/token/",
                                 data={
                                         "username": self.user.username,
                                         "password": "567gjtfi7yuilgh78",
                                     })
 
         data = resp.json()
-        print(data)
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertIn("access", data)
         self.assertIn("refresh", data)
 
     """Праверка адсутнасці магчымасці атрымаць токен з неправільнымі дадзенымі і без іх
+    
         An absence check will receive a token with and without invalid attributions"""
     def test_get_token_invalid(self):
-        resp = self.client.post("/api/token/",
+        resp = self.client.post("/api/talks/token/",
                                 data={
                                     "username": self.user.username,
                                     "password": "1",
                                 })
         self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        resp = self.client.post("/api/token/",
+        resp = self.client.post("/api/talks/token/",
                                 data={
                                     "username": self.user.username,
                                 })
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
 
-        resp = self.client.post("/api/token/",
+        resp = self.client.post("/api/talks/token/",
                                 data={
                                     "password": "567gjtfi7yuilgh78",
                                 })
@@ -59,7 +59,7 @@ class TestJWTAuth(APITestCase):
     """Праверка атрымання новага access-токена
         Checking for a new access token"""
     def test_get_token_refresh(self):
-        resp = self.client.post("/api/token/",
+        resp = self.client.post("/api/talks/token/",
                                 data={
                                         "username": self.user.username,
                                         "password": "567gjtfi7yuilgh78",
@@ -71,7 +71,7 @@ class TestJWTAuth(APITestCase):
         refresh_token = resp.json()["refresh"]
         print(f'first_refresh - {refresh_token}')
 
-        resp = self.client.post("/api/token/refresh/",
+        resp = self.client.post("/api/talks/token/refresh/",
                                 data={"refresh": refresh_token})
         print(f"new_access - {resp.json()}")
         self.assertEqual(resp.status_code, status.HTTP_200_OK)

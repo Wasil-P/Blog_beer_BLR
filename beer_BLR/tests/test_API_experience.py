@@ -51,9 +51,9 @@ class TestAPI(APITestCase):
         super().tearDownClass()
 
     def setUp(self):
-        self.superuser_tokens = self.client.post("/api/token/", self.superuser).json()
-        self.user_owner_tokens = self.client.post("/api/token/", self.user_owner).json()
-        self.user_tokens = self.client.post("/api/token/", self.user).json()
+        self.superuser_tokens = self.client.post("/api/blog/token/", self.superuser).json()
+        self.user_owner_tokens = self.client.post("/api/blog/token/", self.user_owner).json()
+        self.user_tokens = self.client.post("/api/blog/token/", self.user).json()
 
     """Праверка прагляду ўсіх варак юзэраў. Праверка магчымасці стварыць зарэгістраванымі юзэрамі 
     эксперымантальных варак
