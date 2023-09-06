@@ -1,0 +1,24 @@
+{% extends "beer_BLR/base.html" %}
+
+{% block content %}
+    <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #e3af2b">
+        {{ technology.name }}
+    </span>
+
+        <div class="list-group" style="width: 18rem; margin: 20px; background-color: #72c3ea">
+            Апісанне:
+        {{ technology.description }}
+        </div>
+            <div class="container w-50" >
+                <a href="{% url 'all_technologies' %}">
+
+                    <div>
+                        <label style="background-color: #ffffff ">
+                        Вяртанне на папярэднюю старонку
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                        </label>
+                    </div>
+                </a>
+            </div>
+{% endblock %}

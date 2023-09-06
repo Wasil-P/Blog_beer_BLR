@@ -14,10 +14,10 @@ class Technology(models.Model):
     name = models.CharField(max_length=100)
     # Пакуль не ведаю, як гэта рэалізаваць
     # location = models.LocationField()
-    photo = models.ImageField(null=True, upload_to="history/")
+    photo = models.ImageField(null=True, upload_to="Blog/")
     description = models.TextField(max_length=10_000)
 
-    class Meta():
+    class Meta:
         db_table = "technologies"
 
 
@@ -33,6 +33,7 @@ class News(models.Model):
 
     def __str__(self):
         return self.created.strftime('%d.%m.%Y %H:%M')
+
 
 class Recipes(models.Model):
     """У дадзенай мадэлі апісанне рэцэпта піва канкрэтнай тэхналогіі
@@ -53,8 +54,7 @@ class Experience(models.Model):
     description = models.TextField(max_length=5_000)
     tags = models.ManyToManyField("Tag", related_name="experience_tags")
 
-
-    class Meta():
+    class Meta:
         db_table = "experiences"
 
 
