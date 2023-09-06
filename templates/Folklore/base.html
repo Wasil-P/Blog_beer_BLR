@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,7 @@
 </head>
 
 <body style="margin: 10px;">
-    <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary">
+    <div class="p-3 mb-2 bg-primary-subtle text-emphasis-primary" style="background-image: url('{% static 'Folklore/img/back_folklore.jpg' %}');">
 {#    {% include "header.html" %}#}
 
     {% block content %}

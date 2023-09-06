@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from Folklore.models import Category, Folklore, Comments
 from django.views import View, generic
-from django.db.models import Count, Max
-from users.models import User as usermodel
-from django.contrib.auth import get_user_model
-from datetime import datetime, timedelta
-# from .forms import PostForm, EditProfileForm
+from django.db.models import Count
 from django.db import transaction
 from .forms import CommentsForm
 
@@ -62,6 +58,7 @@ class ShowOneFolklore(View):
 
 class CreateComment(View):
     """Клас для стварэння каментароў.
+
     A class for creating comments."""
     model = Comments
 
