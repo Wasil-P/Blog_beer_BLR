@@ -2,14 +2,14 @@
 
 {% block content %}
     <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #e3af2b">
-        {{ news_.name }}
+        {{ news.name }}
     </span>
 
         <div class="list-group" style=" background-color: #72ea82">
             <h5>Апісанне:</h5>
           <h6>
-        {{ news_.description }}
-        {{ news_.created }}
+        {{ news.description }}
+        <br>{{ news.created|date:"d.m.Y H:m" }}
           </h6>
         </div>
         <div class="container w-25"style=" background-color: #72ea82">

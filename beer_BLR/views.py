@@ -1,8 +1,10 @@
+from django.db import transaction
 from django.shortcuts import render
 from django.views import View, generic
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
 from .models import Technology, News, Recipes, Experience, Comments, Tag, About
+from .forms import ExperienceForm
 
 
 class TechnologiesList(generic.ListView):
@@ -51,7 +53,101 @@ class ShowOneNews(View):
             .order_by("name")
 
     def get(self, request, news_id):
-        news_ = get_object_or_404(News, id=news_id)
         news = self.get_queryset(request, news_id)[0]
         return render(request, "beer_BLR/show_news.html",
-                      {"news": news, "news_": news_})
+                      {"news": news})
+
+
+class ExperienceList(generic.ListView):
+    """Клас адлюстравання усіх эксперыментаў карыстальнікаў'
+
+        A class to display all user experiments"""
+
+    template_name = "beer_BLR/experience_home.html"
+    context_object_name = "all_experience"
+
+    def get_queryset(self):
+        return Experience.objects.all().order_by("name")
+
+
+class ShowOneExperience(View):
+    """Клас адлюстравання адной варкі піва
+
+        A single brew mapping class"""
+
+    model = Experience
+    def get(self, request, experience_id):
+        experience = get_object_or_404(Experience, id=experience_id)
+        return render(request, "beer_BLR/experience_show.html",
+                      {"experience": experience})
+
+
+class ExperienceCreate(View):
+    """Клас для стварэння агляду эксперыментальных варак.
+
+    A class for creating an overview of experimental brews."""
+    model = Experience
+
+    def get(self, request):
+        return render(request, "beer_BLR/experience_create.html",
+                      {"form": ExperienceForm()})
+
+    def post(self, request):
+        form = ExperienceForm(request.POST)
+
+        if request.user.is_authenticated or request.user.is_staff:
+            if not form.is_valid():
+                return render(request, "beer_BLR/experience_create.html", {"form": form})
+
+            with transaction.atomic():
+                name = form.cleaned_data["name"]
+                photo = form.cleaned_data["photo"]
+                description = form.cleaned_data["description"]
+                tags = form.cleaned_data["tags"]
+
+                experience = self.model.objects.create(
+                    name=name,
+                    user=request.user,
+                    photo=photo,
+                    description=description,
+                )
+                experience.tags.add(*list(tags))
+                experience.save()
+                experience_id = experience.id
+
+            return redirect(reverse("experience_show", kwargs={"experience_id": experience_id}))
+        return redirect(reverse("register"))
+
+
+class ExperienceEdit(View):
+    model = Experience
+
+    def get(self, request, experience_id):
+        experience = get_object_or_404(Experience, id=experience_id)
+
+        return render(request, "beer_BLR/edit_experience.html", {"experience": experience, "form":
+            ExperienceForm(initial={"description": experience.description, "name": experience.name})})
+
+    def post(self, request, experience_id):
+        form = ExperienceForm(request.POST)
+        experience = get_object_or_404(Experience, id=experience_id)
+
+        if not form.is_valid():
+            return render(request, "beer_BLR/edit_experience.html", {"form": form})
+
+        with transaction.atomic():
+            name = form.cleaned_data["name"]
+            photo = form.cleaned_data["photo"]
+            description = form.cleaned_data["description"]
+            tags = form.cleaned_data["tags"]
+
+            experience.name = name
+            experience.photo = photo
+            experience.description = description
+            experience.tags.add(*list(tags))
+
+            experience.save()
+        return redirect(reverse("experience_show", kwargs={"experience_id": experience_id}))
+
+
+
