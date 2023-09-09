@@ -50,7 +50,7 @@ class Experience(models.Model):
     This model describes the experience of brewing beer according to a traditional recipe of a specific user."""
     name = models.CharField(max_length=100)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name="experience_user")
-    photo = models.ImageField(null=True, upload_to="my_ experience/")
+    photo = models.ImageField(null=True, blank=True, upload_to="Blog/experience/")
     description = models.TextField(max_length=5_000)
     tags = models.ManyToManyField("Tag", related_name="experience_tags")
 
@@ -74,6 +74,8 @@ class Comments(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.name
 
 class About(models.Model):
     """Мадэль для азнаямлення карыстальнікаў з аўтарам блога

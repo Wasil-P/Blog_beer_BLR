@@ -11,7 +11,7 @@ urlpatterns = [
     path("my_experience/create/", views.ExperienceCreate.as_view(), name="create_experience"),
     path("my_experience/<int:experience_id>", views.ShowOneExperience.as_view(), name="experience_show"),
     path("my_experience/<int:experience_id>/edit/", views.ExperienceEdit.as_view(), name="experience_edit"),
-    # path("recipes/", name="all_recipes"),
+    path("recipes/", views.RecipesList.as_view(), name="all_recipes"),
     # path("recipes/<int:recipes_id>", name="recipe_show"),
-    # path("about/", name="about")
+    path("about/", views.AboutView.as_view(), name="about")
 ]
