@@ -1,0 +1,6 @@
+{% autoescape off %}
+    <p>{{ user.username }}, націсніце, для заканчэння рэгістрацыі {{ domain }}</p>
+    <br>
+    <a href="http://{{ domain }}{% url 'user:activate' uidb64=uid token=token %}">
+        http://{{ domain }}{% url 'user:activate' uidb64=uid token=token %}</a>
+{% endautoescape %}

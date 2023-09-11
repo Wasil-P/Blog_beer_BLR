@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 from Menu import view
 from users import views
@@ -28,10 +30,21 @@ urlpatterns = [
     path("blog/", include("beer_BLR.urls_blog"), name="blog"),
     path("folklore/", include("Folklore.urls_folklore"), name="folklore"),
     path("talks/", include("Talks.urls_talks"), name="talks"),
-    path("user/", include("users.urls_user"), name="user"),
+    path("user/", include("users.urls_user", namespace="user")),
     path("register/", views.Register.as_view(), name="register"),
+    path(
+        "accounts/",
+        include(
+            ("django.contrib.auth.urls", "django.contrib.auth"), namespace="accounts"
+        ),
+    ),
     #API_____________________________________________________
     path("api/blog/", include("beer_BLR.api.urls_api")),
     path("api/talks/", include("Talks.api.urls_api")),
     path('api-auth/', include('rest_framework.urls'))
 ]
+
+    # media___________________________________________________
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

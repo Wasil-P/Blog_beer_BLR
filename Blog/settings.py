@@ -151,6 +151,16 @@ STATICFILES_DIRS = [
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# Email
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'it.dzemidok@gmail.com'
+DEFAULT_FROM_EMAIL = 'it.dzemidok@gmail.com'
+EMAIL_HOST_PASSWORD = 'o b m m j v t c t i d v i c v a'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
