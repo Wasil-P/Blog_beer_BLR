@@ -1,0 +1,28 @@
+{% extends "beer_BLR/base2.html" %}
+{%load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container w-50">
+    <form method="post">
+
+        {% csrf_token %}
+
+
+        {{form | crispy}}
+        Падцвярдзіця змены
+        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Падцвердзіць</button>>
+    </form>
+
+        <a href="{% url 'all_experience' %}">
+
+            <div>
+                <label>
+                Вяртанне на папярэднюю старонку
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                </label>
+            </div>
+        </a>
+    </div>
+{% endblock %}

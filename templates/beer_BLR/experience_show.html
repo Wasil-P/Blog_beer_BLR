@@ -1,0 +1,44 @@
+{% extends "beer_BLR/base2.html" %}
+
+{% block content %}
+    <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #ecc35e">
+        {{ experience.name }}
+    </span>
+        <div class="border border-success border-2 fs-2 w-50">
+            <h5 style="background-color: #f1de63"> Аўтар - {{ experience.user }}</h5>
+        </div>
+        <div class="border border-success border-2 fs-2 w-50" style="display: inline-block; background-color: #31f562"> Змест:
+        <br>{{ experience.description }}
+        {% if experience.photo  %}
+        <img src="{{ experience.photo.url }}" style="width:100%;height:auto;">
+        {% endif %}
+        </div>
+                    <a>
+                        <h8 class="card-text" style="float: right; background-color: #dfaaf1" >
+                            Тэгі - {% for tag in experience.tags.all %}{{ tag.name }}{% endfor %}
+                        </h8>
+                     </a>
+
+    <div class="container w-50" >
+        {% if experience.user == request.user or request.user.is_staff %}
+        <a href="{% url "experience_edit" experience.id %}">
+            <div>
+                <label style="background-color: #abf6ed ">
+                Рэдагаванне інфармацыі
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Рэдагаваць</button>>
+                </label>
+            </div>
+        </a>
+        {% endif %}
+        <a href="{% url 'all_experience' %}">
+            <div>
+                <label style="background-color: #abf6ed ">
+                Вяртанне на папярэднюю старонку
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                </label>
+            </div>
+        </a>
+    </div>
+{% endblock %}
+
+

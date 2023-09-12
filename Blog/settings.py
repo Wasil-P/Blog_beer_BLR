@@ -159,7 +159,9 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'it.dzemidok@gmail.com'
 DEFAULT_FROM_EMAIL = 'it.dzemidok@gmail.com'
-EMAIL_HOST_PASSWORD = 'o b m m j v t c t i d v i c v a'
+EMAIL_HOST_PASSWORD = 'f k m c o v r y y o j z c n p q'
+
+LOGIN_REDIRECT_URL = "/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

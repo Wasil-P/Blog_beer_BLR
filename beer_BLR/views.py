@@ -2,6 +2,7 @@ from django.db import transaction
 from django.shortcuts import render
 from django.views import View, generic
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.core.exceptions import PermissionDenied
 
 from .models import Technology, News, Recipes, Experience, Comments, Tag, About
 from .forms import ExperienceForm
@@ -74,8 +75,8 @@ class ShowOneExperience(View):
     """Клас адлюстравання адной варкі піва
 
         A single brew mapping class"""
-
     model = Experience
+
     def get(self, request, experience_id):
         experience = get_object_or_404(Experience, id=experience_id)
         return render(request, "beer_BLR/experience_show.html",
@@ -124,9 +125,10 @@ class ExperienceEdit(View):
 
     def get(self, request, experience_id):
         experience = get_object_or_404(Experience, id=experience_id)
-
-        return render(request, "beer_BLR/edit_experience.html", {"experience": experience, "form":
-            ExperienceForm(initial={"description": experience.description, "name": experience.name})})
+        if experience.user == request.user or request.user.is_staff:
+            return render(request, "beer_BLR/edit_experience.html", {"experience": experience, "form":
+                ExperienceForm(initial={"description": experience.description, "name": experience.name})})
+        return redirect(reverse("experience_show", kwargs={"experience_id": experience_id}))
 
     def post(self, request, experience_id):
         form = ExperienceForm(request.POST)
@@ -151,3 +153,15 @@ class ExperienceEdit(View):
 
 
 
+class RecipesList(generic.ListView):
+    """Клас адлюстравання усіх рэцэптаў традыцыйнага піва
+
+        Class display of all traditional beer recipes"""
+    pass
+
+
+class AboutView(View):
+    """Клас адлюстравання інфармацыі і кантактаў аб аўтары
+
+        A class for displaying information and contacts about the author"""
+    pass
