@@ -152,12 +152,27 @@ class ExperienceEdit(View):
         return redirect(reverse("experience_show", kwargs={"experience_id": experience_id}))
 
 
-
 class RecipesList(generic.ListView):
     """Клас адлюстравання усіх рэцэптаў традыцыйнага піва
 
         Class display of all traditional beer recipes"""
-    pass
+    template_name = "beer_BLR/recipes_home.html"
+    context_object_name = "all_recipes"
+
+    def get_queryset(self):
+        return Recipes.objects.all().order_by("name")
+
+
+class ShowOneRecipe(View):
+    """Клас адлюстравання аднаго канкрэтнага рэцэпта
+
+        A mapping class for one specific recipe"""
+    model = Recipes
+
+    def get(self, request, recipes_id):
+        recipe = get_object_or_404(Recipes, id=recipes_id)
+        return render(request, "beer_BLR/recipe_show.html",
+                      {"recipe": recipe})
 
 
 class AboutView(View):

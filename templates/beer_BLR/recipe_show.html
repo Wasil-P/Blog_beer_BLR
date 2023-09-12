@@ -1,0 +1,12 @@
+{% extends "beer_BLR/base2.html" %}
+
+{% block content %}
+    <div class="card w-50" style="width: 18rem;">
+      <img src="{{ recipe.photo.url }}" class="card-img-top" style="height: 25%; width: 25%; object-fit: contain">
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe.name }}</h5>
+        <p class="card-text">{{ recipe.description }}</p>
+        <a href="{% url 'all_recipes' %}" class="btn btn-primary">Вярнуцца</a>
+      </div>
+    </div>
+{% endblock %}

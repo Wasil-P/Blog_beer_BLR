@@ -1,0 +1,14 @@
+{% extends "beer_BLR/base2.html" %}
+
+<h5 class="card-title" style="background-color: #e39350 ">Пакрокавыя рэцэпты традыцыйнага піваварэння з дадзенымі</h5>
+{% block content %}
+    {% for recipe in all_recipes %}
+        <div class="card" style="width: 18rem;margin: 15px 15px;box-shadow: 8px 8px #205067; background-color: #a89b03">
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">{{ recipe.description|truncatechars:30 }}</p>
+            <a href="{% url "recipe_show" recipe.id %}" class="card-link">Падрабязней</a>
+          </div>
+        </div>
+    {% endfor %}
+{% endblock %}
