@@ -1,0 +1,17 @@
+{% extends "beer_BLR/base2.html" %}
+
+{% block content %}
+    {% for about in all_about %}
+    <div class="card w-50" style="width: 18rem;">
+      <img src="{{ about.profile_picture.url }}" class="card-img-top"  style="height: 25%; width: 25%; object-fit: contain">
+      <div class="card-body">
+        <p class="card-text">{{ about.description }}</p>
+          <h8 class="card-title">Сацыяльныя сеткі:</h8>
+          <br>
+         <h8 class="card-title"><a href="{{ about.insta }}">Instagram</a></h8>
+          <br>
+        <a href="{% url "home" %}" class="btn btn-primary">Вярнуцца</a>
+      </div>
+    </div>
+    {% endfor %}
+{% endblock %}

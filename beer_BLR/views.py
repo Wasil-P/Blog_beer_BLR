@@ -175,8 +175,14 @@ class ShowOneRecipe(View):
                       {"recipe": recipe})
 
 
-class AboutView(View):
+class AboutView(generic.ListView):
     """Клас адлюстравання інфармацыі і кантактаў аб аўтары
 
         A class for displaying information and contacts about the author"""
-    pass
+
+    template_name = "beer_BLR/about.html"
+    context_object_name = "all_about"
+
+    def get_queryset(self):
+        return About.objects.all()
+

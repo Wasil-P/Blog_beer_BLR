@@ -84,4 +84,4 @@ class About(models.Model):
     profile_picture = models.ImageField(null=True)
     description = models.TextField(max_length=500)
     email = models.EmailField()
-    insta = models.CharField(max_length=100)
+    insta = models.URLField(max_length=200)
