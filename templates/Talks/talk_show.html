@@ -1,0 +1,55 @@
+{% extends "Talks/base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="card-text w-25" style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+        <h3>Катэгорыя - {{ category.name }}</h3>
+        </div>
+    <div class="card-text w-75" style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+        <h3>{{ talk.question }}</h3>
+        <br>
+        <h4>Дата - {{ talk.created|date:"d.m.Y H:m" }}
+        <br>
+        Аўтар - {{ talk.user }}
+        </h4>
+    </div>
+
+
+    {% for message in list_message %}
+        <ol class="list-group list-group-numbered" >
+            <li class="list-group-item w-50" style="background-image: url('{% static 'Talks/img/card2.jpg' %}');">
+                <h5>{{ message.description }}
+                <br>
+                {{ message.created|date:"d.m.Y H:m" }}
+                <br>
+                {{ message.user__username }}
+                </h5>
+            </li>
+        </ol>
+
+    {% endfor %}
+
+
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'message_create' category.id talk.id %}">
+            <div>
+                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+                        Адказаць
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Перайсці</button>>
+                </label>
+            </div>
+        </a>
+    {% endif %}
+        <a href="{% url 'category_show_talks' category.id %}">
+
+            <div >
+                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+                Вяртанне на папярэднюю старонку
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                </label>
+            </div>
+        </a>
+
+
+{% endblock %}

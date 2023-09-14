@@ -1,0 +1,16 @@
+{% extends "Talks/base.html" %}
+
+
+{% block content %}
+    <h5 class="card-title" style="background-color: #c07249 ">Форум дзе вы можаце задаць пытанне па катэгорыі, якая вас цікавіць</h5>
+    {% for category in all_categories %}
+        <div class="list-group">
+            <a href="{% url "category_show_talks" category.id %}" class="list-group-item list-group-item-action active" style="width: 25rem;margin: 15px 15px;box-shadow: 8px 8px #205067; background-color: #078164" aria-current="true">
+                {{ category.name }}
+            </a>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

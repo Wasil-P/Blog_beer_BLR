@@ -11,6 +11,10 @@ from . import views
     question_show: display specific questions with messages"""
 urlpatterns = [
     path("", views.CategoryTalksList.as_view(), name="categories_all"),
-    # path("category/", name="category_show"),
-    # path("category/<int:talks_id>", name="question_show")
+    path("<int:category_id>", views.OneCategoryTalks.as_view(), name="category_show_talks"),
+    path("<int:category_id>/create/", views.TalkCreate.as_view(), name="talk_create"),
+    path("<int:category_id>/<int:talk_id>/edit/", views.TalkCreate.as_view(), name="talk_edit"),
+
+    path("<int:category_id>/<int:talk_id>", views.OneTalkShow.as_view(), name="talk_show"),
+    path("<int:category_id>/<int:talk_id>/create/", views.MessageCreate.as_view(), name="message_create")
 ]
