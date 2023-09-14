@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container w-50">
+<div class="container w-50" style="background-color: #b5dcef ">
     <h2>Рэгістрацыя на сайце</h2>
     <form method="post">
         {% csrf_token %}
@@ -10,4 +10,16 @@
         <button class="btn btn-outline-success" type="submit">Падцвердзіць</button>
     </form>
 </div>
+                <div class="container w-50" >
+                <a href="{% url "home" %}">
+
+                    <div>
+                        <label style="background-color: #b5dcef  ">
+                        Вяртанне на папярэднюю старонку
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                        </label>
+                    </div>
+                </a>
+            </div>
 {% endblock %}

@@ -5,7 +5,7 @@
     <h5 class="card-title" style="background-color: #37ad91 ">Навіны звязаныя с традыцыйным піваварэннем у Беларусі і Свеце</h5>
     {% for news in all_news %}
 
-        <div class="list-group" style="width: 18rem; margin: 20px; box-shadow: 8px 8px #205067">
+        <div class="list-group" style="width: 18rem; margin: 20px; box-shadow: 8px 8px #205067; display: inline-block;">
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
 
 
@@ -14,10 +14,21 @@
                 </svg> {{ news.name }}
                 <br>{{ news.created|date:"d.m.Y H:m"}}
                  <img src="{{ news.photo.url }}" style="width:100%;height:auto; object-fit: contain">
-                <a href="{% url "news_show" news.id %}" class="btn btn-info" style="box-shadow: 3px 3px #3db733">Падрабязней</a>
+                <a href="{% url "news_show" news.id %}" class="btn btn-info" style="width: 18rem; box-shadow: 3px 3px #3db733">Падрабязней</a>
              </a>
         </div>
 
     {% endfor %}
+            <div class="container w-50" >
+                <a href="{% url "home" %}">
 
+                    <div>
+                        <label style="background-color: #ffffff ">
+                        Вяртанне на папярэднюю старонку
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                        </label>
+                    </div>
+                </a>
+            </div>
 {% endblock %}

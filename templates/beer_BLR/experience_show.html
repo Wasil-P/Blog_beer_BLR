@@ -8,7 +8,7 @@
             <h5 style="background-color: #f1de63"> Аўтар - {{ experience.user }}</h5>
         </div>
         <div class="border border-success border-2 fs-2 w-50" style="display: inline-block; background-color: #31f562"> Змест:
-        <br>{{ experience.description }}
+        <br><h5>{{ experience.description }}</h5>
         {% if experience.photo  %}
         <img src="{{ experience.photo.url }}" style="width:100%;height:auto;">
         {% endif %}

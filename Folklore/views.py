@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from Folklore.models import Category, Folklore, Comments
 from django.views import View, generic
 from django.db.models import Count
 from django.db import transaction
+
+from Folklore.models import Category, Folklore, Comments
 from .forms import CommentsForm
 
 

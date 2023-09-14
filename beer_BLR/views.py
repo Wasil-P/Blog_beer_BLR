@@ -1,10 +1,8 @@
 from django.db import transaction
-from django.shortcuts import render
 from django.views import View, generic
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.core.exceptions import PermissionDenied
 
-from .models import Technology, News, Recipes, Experience, Comments, Tag, About
+from .models import Technology, News, Recipes, Experience, Comments, About
 from .forms import ExperienceForm
 
 

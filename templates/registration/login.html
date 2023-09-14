@@ -2,12 +2,11 @@
 
 
 {% block content %}
-<main class="form-signin w-50 m-auto">
+<main class="form-signin w-50 m-auto" style="background-color: #94f5a1 ">
   <form method="post">
 
       {% csrf_token %}
 
-    <img class="mb-4" src="" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
@@ -24,9 +23,18 @@
 {#    <a href="{% url 'user:reset-password' %}">#}
 {#        Забыли пароль#}
 {#    </a>#}
-
-    <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
   </form>
 </main>
+            <div class="container w-50" >
+                <a href="{% url "home" %}">
 
+                    <div>
+                        <label style="background-color: #b5dcef  ">
+                        Вяртанне на папярэднюю старонку
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+
+                        </label>
+                    </div>
+                </a>
+            </div>
 {% endblock %}

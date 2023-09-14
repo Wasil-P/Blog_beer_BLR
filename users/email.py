@@ -10,8 +10,8 @@ class BaseEmailSender:
     template_name = ""
     user_field = "id"
 
-    def __init__(self, current_site: str, user: AbstractUser):
-        self.current_site = current_site
+    def __init__(self, request, user: AbstractUser):
+        self.request = request
         self._user = user
 
     def get_template_name(self):
@@ -19,8 +19,6 @@ class BaseEmailSender:
             raise NotImplemented("Шаблон для адпраўкі email адсутнічае")
         return self.template_name
 
-    def get_domain(self):
-        return self.current_site
 
     def get_uid_base64(self):
         user_field_data = getattr(self._user, self.user_field)
@@ -32,7 +30,7 @@ class BaseEmailSender:
     def get_context(self):
         return {
             "user": self._user,
-            "domain": self.get_domain(),
+            "domain": self.request.get_host(),
             "uid": self.get_uid_base64(),
             "token": self.get_user_token(),
         }
@@ -41,7 +39,7 @@ class BaseEmailSender:
         return render_to_string(self.get_template_name(), self.get_context())
 
     def get_subject(self):
-        return f"Падцвердзіця рэгістрацыю на сайце {self.get_domain()}"
+        return f"Падцвердзіця рэгістрацыю на сайце {self.request.get_host()}"
 
     def perform_send_email(self):
         message = self.get_message()

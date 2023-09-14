@@ -5,7 +5,7 @@
     <h5 class="card-title" style="background-color: #e39350 ">Эксперыменты варак па традыцыйных рэцэптах карыстальнікаў сайта</h5>
     {% for experience in all_experience %}
 
-        <div class="list-group" style=" width: 18rem; margin: 20px; box-shadow: 8px 8px #205067">
+        <div class="list-group w-50" style=" width: 18rem; margin: 20px; box-shadow: 8px 8px #205067">
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
 
 
@@ -24,4 +24,16 @@
         Распавесці пра уласную эксперыментальную варку <a href="{% url "create_experience" %}" class="btn btn-info" style="box-shadow: 3px 3px #3db733">Падзяліцца</a>
     </label>
     {% endif %}
+                <div class="container w-50" >
+                <a href="{% url "home" %}">
+
+                    <div>
+                        <label style="background-color: #918602 ">
+                        Вяртанне на папярэднюю старонку
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #918602">Вярнуцца</button>>
+
+                        </label>
+                    </div>
+                </a>
+            </div>
 {% endblock %}

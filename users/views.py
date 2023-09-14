@@ -13,7 +13,6 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
-from django.contrib.sites.shortcuts import get_current_site
 
 
 class Register(View):
@@ -48,7 +47,7 @@ class ConfirmRegisterView(View):
         if default_token_generator.check_token(user, token):
             user.is_active = True
             user.save()
-            return HttpResponse("<h1>Дзякуй, за падцвярджэнне рэгістрацыі</h1>")
+            return redirect(reverse("accounts:login"))
 
         return HttpResponse("<h1>Спасылка нядзейсная</h1>")
 
