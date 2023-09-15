@@ -6,24 +6,23 @@
         <h3>Катэгорыя - {{ category.name }}</h3>
         </div>
     <div class="card-text w-75" style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
-        <h3>{{ talk.question }}</h3>
-        <br>
-        <h4>Дата - {{ talk.created|date:"d.m.Y H:m" }}
+        <h5>{{ talk.question }}</h5>
+        <h6>Дата - {{ talk.created|date:"d.m.Y H:m" }}
         <br>
         Аўтар - {{ talk.user }}
-        </h4>
+        </h6>
     </div>
 
 
     {% for message in list_message %}
         <ol class="list-group list-group-numbered" >
-            <li class="list-group-item w-50" style="background-image: url('{% static 'Talks/img/card2.jpg' %}');">
-                <h5>{{ message.description }}
+            <li class="list-group-item w-50" style="margin: 10px; background-image: url('{% static 'Talks/img/card2.jpg' %}');">
+                <h6>{{ message.description }}
                 <br>
                 {{ message.created|date:"d.m.Y H:m" }}
                 <br>
                 {{ message.user__username }}
-                </h5>
+                </h6>
             </li>
         </ol>
 

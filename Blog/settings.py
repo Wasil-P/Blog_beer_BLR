@@ -163,6 +163,13 @@ EMAIL_HOST_PASSWORD = ''
 
 LOGIN_REDIRECT_URL = "/"
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': 'C:/Users/Nasta/PycharmProjects/Blog/cache',
+    }
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
