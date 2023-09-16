@@ -12,8 +12,6 @@ class Technology(models.Model):
      field location: a link to a Google map with the specific location of the recorded technology
     """
     name = models.CharField(max_length=100)
-    # Пакуль не ведаю, як гэта рэалізаваць
-    # location = models.LocationField()
     photo = models.ImageField(null=True, upload_to="Blog/")
     description = models.TextField(max_length=10_000)
 
@@ -32,7 +30,7 @@ class News(models.Model):
     tags = models.ManyToManyField("Tag", related_name="news")
 
     def __str__(self):
-        return self.created.strftime('%d.%m.%Y %H:%M')
+        return self.name
 
 
 class Recipes(models.Model):
@@ -57,6 +55,8 @@ class Experience(models.Model):
     class Meta:
         db_table = "experiences"
 
+    def __str__(self):
+        return self.name
 
 class Comments(models.Model):
     """Мадэль для каментара пад пастамі з вопытам варак канкрэтнага карыстальніка
@@ -67,8 +67,6 @@ class Comments(models.Model):
     content = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.created.strftime('%d.%m.%Y %H:%M')
 
 
 class Tag(models.Model):

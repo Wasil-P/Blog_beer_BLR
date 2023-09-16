@@ -22,6 +22,10 @@ class Folklore(models.Model):
     description = models.TextField(max_length=10_000)
     link = models.TextField(max_length=256)
 
+    def __str__(self):
+        return self.description
+
+
 
 class Comments(models.Model):
     """Мадэль для каментара пад творамі фальклору
@@ -32,5 +36,3 @@ class Comments(models.Model):
     content = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.created.strftime('%d.%m.%Y %H:%M')

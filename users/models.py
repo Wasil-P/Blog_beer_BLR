@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import escape
 from django.contrib.auth.models import AbstractUser
 
 
@@ -11,3 +12,4 @@ class User(AbstractUser):
 
     class Meta:
         db_table = "users"
+

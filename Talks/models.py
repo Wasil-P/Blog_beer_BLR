@@ -5,14 +5,9 @@ class Category(models.Model):
     """Мадэль для катэгорыі пытанняў карыстальнікаў
 
     A model that describes categories for user questions"""
-    # WATER = "Water"
-    # HOP = "Hop"
-    # MALT = "Malt"
-    # YEAST = "Yeast"
-    # EQUIPMENT = "Equipment and tools"
-    # HISTORY = "History"
-    # OTHER = "Other"
     name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 
 class Talks(models.Model):
@@ -27,7 +22,7 @@ class Talks(models.Model):
     question = models.TextField(max_length=500)
 
     def __str__(self):
-        return self.created.strftime('%d.%m.%Y %H:%M')
+        return self.question
 
 
 class Message(models.Model):
@@ -40,4 +35,5 @@ class Message(models.Model):
     description = models.TextField(max_length=1000)
 
     def __str__(self):
-        return self.created.strftime('%d.%m.%Y %H:%M')
+        return self.description
+

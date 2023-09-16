@@ -106,7 +106,7 @@ class OneTalkShow(View):
     def get_queryset(self, request, talk_id):
         return Message.objects.filter(talks__id=talk_id) \
             .select_related("user", "talks") \
-            .values("user", "created", "description", "user__username", "talks__category__name") \
+            .values("user", "created", "description", "user__username", "user__profile_picture") \
             .order_by("-created")
 
     def get(self, request, category_id, talk_id):
