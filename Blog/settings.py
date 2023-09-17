@@ -218,3 +218,15 @@ SIMPLE_JWT = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+CELERY_BROKER_URL = f"redis://localhost:6379/1"
+
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
+CELERY_TASK_ROUTES = {
+    "beer_BLR.tasks.send_new_news": {
+        "queue": "email",
+    },
+    "beer_BLR.tasks.send_new_experience": {
+        "queue": "email",
+    },
+}

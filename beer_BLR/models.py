@@ -1,5 +1,8 @@
 from django.db import models
-# from ya_storage.storage import yandex_disk_storage
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth import get_user_model
+from .tasks import send_new_news, send_new_experience
 
 
 class Technology(models.Model):
@@ -32,6 +35,20 @@ class News(models.Model):
     def __str__(self):
         return self.name
 
+@receiver([post_save], sender=News)
+def check_user(sender, instance: News, **kwargs):
+
+    for user in get_user_model().objects.all():
+
+        if not user.email or user.notify is False:
+            return
+
+        id = instance.id
+        name = instance.name
+        description = instance.description
+
+        send_new_news.delay(id, user.id, name, description)
+
 
 class Recipes(models.Model):
     """У дадзенай мадэлі апісанне рэцэпта піва канкрэтнай тэхналогіі
@@ -57,6 +74,21 @@ class Experience(models.Model):
 
     def __str__(self):
         return self.name
+
+@receiver([post_save], sender=Experience)
+def check_user(sender, instance: Experience, **kwargs):
+
+    for user in get_user_model().objects.all():
+
+        if not user.email or user.notify is False:
+            return
+
+        id = instance.id
+        name = instance.name
+        description = instance.description
+
+        send_new_experience.delay(id, user.id, name, description)
+
 
 class Comments(models.Model):
     """Мадэль для каментара пад пастамі з вопытам варак канкрэтнага карыстальніка
