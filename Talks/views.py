@@ -5,7 +5,7 @@ from django.db.models import Count
 
 from .models import Category, Talks, Message
 from .forms import TalksForm, MessageForm
-
+from .tg_notifier import TGNotify
 
 class CategoryTalksList(generic.ListView):
     """Клас адлюстравання усіх катэгорый форума
@@ -144,5 +144,10 @@ class MessageCreate(View):
                 description=description,
             )
             message.save()
+            TGNotify().send_message(
+                message=f"На вашае пытанне - \n {talk.question},\n прыйшоў новы адказ!\n"
+                        f"Час - {message.created.strftime('%d.%m.%Y %H:%M')}",
+                to_user_tg_id=talk.user.tg_id,
+            )
         return redirect(reverse("talk_show", kwargs={"category_id": category_id, "talk_id": talk_id}))
 

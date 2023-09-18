@@ -9,6 +9,7 @@ class User(AbstractUser):
     email = models.EmailField(null=False)
     profile_picture = models.ImageField(null=True)
     notify = models.BooleanField(default=True)
+    tg_id = models.IntegerField(null=True, blank=True)
 
     class Meta:
         db_table = "users"
