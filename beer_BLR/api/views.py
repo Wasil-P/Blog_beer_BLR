@@ -2,7 +2,6 @@ from rest_framework import generics
 from rest_framework.response import Response
 
 from ..models import Technology, Experience
-from Talks.models import Talks, Category, Message
 from .serializers import TechnologySerializer, ExperienceSerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrAdminUserOrReadOnly, IsAuthenticatedOrReadOnly
 

@@ -1,16 +1,13 @@
-
 from django.views import View
-from .forms import UserRegisterForm
-from .email import RegisterConfirmEmailSender
-
-
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
+
+from .forms import UserRegisterForm
+from .email import RegisterConfirmEmailSender
 
 
 class Register(View):

@@ -2,7 +2,7 @@ from django.db import transaction
 from django.views import View, generic
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from .models import Technology, News, Recipes, Experience, Comments, About
+from .models import Technology, News, Recipes, Experience, About
 from .forms import ExperienceForm
 
 

@@ -1,7 +1,7 @@
 import textwrap
 from django.contrib import admin
 
-from .models import Comments, Folklore
+from .models import Comments
 
 
 @admin.register(Comments)

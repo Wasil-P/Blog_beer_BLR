@@ -5,10 +5,6 @@ class Category(models.Model):
     """Мадэль для катэгорыі (віда) твора фальклору
 
     A model of a category (type) of a folklore work"""
-    # PROVERB = "Proverb"
-    # RIDDLE = "Riddle"
-    # SONG = "Song, an excerpt of a song"
-    # RITE = "Rite"
     name = models.CharField(max_length=100)
 
 
@@ -24,7 +20,6 @@ class Folklore(models.Model):
 
     def __str__(self):
         return self.description
-
 
 
 class Comments(models.Model):

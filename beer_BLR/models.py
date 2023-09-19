@@ -15,7 +15,7 @@ class Technology(models.Model):
      field location: a link to a Google map with the specific location of the recorded technology
     """
     name = models.CharField(max_length=100)
-    photo = models.ImageField(null=True, upload_to="Blog/")
+    photo = models.ImageField(null=True, upload_to="Blog/Technologies/")
     description = models.TextField(max_length=10_000)
 
     class Meta:
@@ -27,7 +27,7 @@ class News(models.Model):
 
     In this model, the description of the news for the blog"""
     name = models.CharField(max_length=100)
-    photo = models.ImageField(null=True, upload_to="blog/")
+    photo = models.ImageField(null=True, upload_to="Blog/news/")
     created = models.DateTimeField(auto_now_add=True)
     description = models.TextField(max_length=5_000)
     tags = models.ManyToManyField("Tag", related_name="news")
@@ -55,7 +55,7 @@ class Recipes(models.Model):
 
     This model describes the beer recipe of a specific technology"""
     name = models.CharField(max_length=100)
-    photo = models.ImageField(null=True, upload_to="recipes/")
+    photo = models.ImageField(null=True, upload_to="Blog/recipes/")
     description = models.TextField(max_length=5_000)
 
 

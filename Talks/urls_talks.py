@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
 from django.views.decorators.cache import cache_page
 
+from . import views
 
 # talks/
 """categories_all: адлюстраванне усіх катэгорый для форума
