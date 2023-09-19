@@ -2,14 +2,15 @@ import textwrap
 from celery import shared_task
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMultiAlternatives
-
+from users.models import User
 
 
 @shared_task(ignore_result=True)
-def send_new_news(id, user, name, description):
+def send_new_news(id, user_id, name, description):
     description = textwrap.wrap(description, 50)[0] + "..."
     name_short = textwrap.wrap(name, 25)[0] + "..."
     link = f'http://127.0.0.1:8000/blog/news/{id}'
+    user = get_user_model().objects.filter(id=user_id)
 
     email = EmailMultiAlternatives(
         subject=f"З'явілася новая навіна: {name_short}",
@@ -23,9 +24,10 @@ def send_new_news(id, user, name, description):
     email.send()
 
 @shared_task(ignore_result=True)
-def send_new_experience(id, user, name, description):
+def send_new_experience(id, user_id, name, description):
     description = textwrap.wrap(description, 50)[0] + "..."
     link = f'http://127.0.0.1:8000/blog/my_experience/{id}'
+    user = get_user_model().objects.filter(id=user_id)
 
     email = EmailMultiAlternatives(
         subject=f"З'явілася новая навіна: {name}",

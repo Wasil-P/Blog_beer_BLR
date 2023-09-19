@@ -1,7 +1,5 @@
-from django.shortcuts import render, redirect, reverse
 
 from django.views import View
-from .models import User
 from .forms import UserRegisterForm
 from .email import RegisterConfirmEmailSender
 
