@@ -7,7 +7,7 @@
     </div>
     <br>
         <div class="card" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; ">
-            <h5>{{ technology.description }}</h5>
+            <h5>{{ technology.description|linebreaks }}</h5>
         </div>
                 <a href="{% url 'all_technologies' %}">
 

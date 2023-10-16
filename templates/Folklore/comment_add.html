@@ -3,16 +3,16 @@
 
 {% block content %}
 
-    <div class="container w-50" style="background-color: #f6ec6d ">
+    <div class="container w-50" style="background-color: #1bab83 ">
         <form method="post">
 
             {% csrf_token %}
 
             {{form | crispy}}
             <div>
-                <label>
+                <label style="color: black;">
                     Адпраўка гатовага тэксту
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Адправіць</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Адправіць</button>
                 </label>
             </div>
         </form>
@@ -20,9 +20,9 @@
         <a href="{% url 'folklore_show' category.id folklore.id %}">
 
             <div>
-                <label>
+                <label style="color: black;">
                 Вяртанне на папярэднюю старонку
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                 </label>
             </div>

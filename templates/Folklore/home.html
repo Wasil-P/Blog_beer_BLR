@@ -1,12 +1,14 @@
 {% extends "Folklore/base.html" %}
-
+{% load static %}
 
 {% block content %}
-    <h5 class="card-title" style="background-color: #de6060 ">Тут вы знойдзеце традыцыйныя творы мастацтва і ўрыўкі звязаныя з піваварэннем</h5>
-    {% for category in all_categories %}
+    <div class="card" style=" width: 75%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'Folklore/img/card.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;  ">
+    <h4 class="card-title" >Тут вы знойдзеце традыцыйныя творы мастацтва і ўрыўкі звязаныя з піваварэннем</h4>
+    </div>
+        {% for category in all_categories %}
 
-        <div class="list-group" style="width: 18rem; margin: 20px; box-shadow: 8px 8px #205067">
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="list-group" style=" width: 35%; margin: 20px; box-shadow: 8px 8px #205067;">
+            <a href="#" class="list-group-item list-group-item-action active" style="background-color: #17916f; "aria-current="true">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
               <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
@@ -14,21 +16,28 @@
               <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
               <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
             </svg> {{ category.name }}
-                <a href="{% url "category_show" category.id %}" class="btn btn-info" style="box-shadow: 3px 3px #3db733">Паглядзець</a>
+                    <h8 class="card-text" style="float: right" > Усяго - {{ category.folklore__count }}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-stars" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z"/>
+                        </svg>
+                    </h8>
+
+                <a href="{% url "category_show" category.id %}" class="btn btn-info" style="color: lightgoldenrodyellow; width: 100%; background-color: #205067;">Паглядзець</a>
              </a>
         </div>
 
     {% endfor %}
-                <div class="container w-50" >
+
                 <a href="{% url "home" %}">
 
                     <div>
-                        <label style="background-color: #ffffff ">
+                        <label style="color: black;">
                         Вяртанне на папярэднюю старонку
-                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                         </label>
                     </div>
                 </a>
-            </div>
+
 {% endblock %}

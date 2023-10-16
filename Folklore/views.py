@@ -16,7 +16,10 @@ class CategoryFolkloreList(generic.ListView):
     context_object_name = "all_categories"
 
     def get_queryset(self):
-        return Category.objects.all().order_by("name")
+        return Category.objects.all().select_related("folklore").\
+            annotate(Count("folklore")).\
+            values("id", "name", "folklore__count").\
+            order_by("name")
 
 
 class ShowOneCategory(View):

@@ -1,33 +1,40 @@
 {% extends "Folklore/base.html" %}
 {%load crispy_forms_tags %}
+{% load static %}
+
 
 {% block content %}
-    <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #e3af2b">
-        {{ folklore.description }}
-    </span>
-    <h8 style="background-color: #e3af2b"> Спасылка - {{ folklore.link }}</h8>
+    <div class="card" style=" color: lightgoldenrodyellow; width: 75%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px 0px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+     <h3>{{ folklore.description|linebreaks }}</h3>
+    </div>
+    <br>
+    <div class="card" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 0px 0px 0px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+    <h8 > Спасылка: {{ folklore.link }}</h8>
+    </div>
+        <div class="card" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 100px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+            <h5>Каментары:</h5>
 
-        <div class="border border-success border-2 fs-2 w-25" style="background-color: #0ca432"> Каментары:
-        </div>
             {% for comment in list_comments %}
-                <div class="container w-100" class="btn btn-info" style="background-color: #0ca432 ">
+               <div class="card" style=" color: lightgoldenrodyellow; width: 100%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 0px 10px 0px 0px; display: inline-block; background-position: center;">
                     <a href="#" class="list-group-item list-group-item-action active fw-bold" aria-current="true">
-                                     Аўтар - {{ comment.username }}, Тэкст - {{ comment.content }},
+                        <h6>{{ comment.username }}:</h6>
+                        <h12>{{ comment.content }},</h12>
                         <h8 class="card-text" style="float: right" >
-                            Дата стварэння - {{ comment.created }}
+                           {{ comment.created|date:"d.m.Y H:i" }}
                         </h8>
                      </a>
                 </div>
+
             {% endfor %}
 
+        </div>
 
-    <div class="container w-50" >
         <a href="{% url 'comment_add' category.id folklore.id  %}">
 
             <div>
-                <label style="background-color: #ffffff ">
+                <label style="color: black;">
                 Пакінуць каментар
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Стварыць</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Стварыць</button>
 
                 </label>
             </div>
@@ -36,12 +43,11 @@
         <a href="{% url 'category_show' category.id %}">
 
             <div>
-                <label style="background-color: #ffffff ">
+                <label style="color: black;">
                 Вяртанне на папярэднюю старонку
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                 </label>
             </div>
         </a>
-    </div>
 {% endblock %}
