@@ -1,24 +1,22 @@
 {% extends "beer_BLR/base.html" %}
+{% load static %}
 
 {% block content %}
-    <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #e3af2b">
-        {{ technology.name }}
-    </span>
-
-        <div class="list-group" style="width: 18rem; margin: 20px; background-color: #72c3ea">
-            Апісанне:
-        {{ technology.description }}
+    <div class="card" style=" width: 35%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; ">
+        <h2>{{ technology.name }}</h2>
+    </div>
+    <br>
+        <div class="card" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; ">
+            <h5>{{ technology.description }}</h5>
         </div>
-            <div class="container w-50" >
                 <a href="{% url 'all_technologies' %}">
 
                     <div>
-                        <label style="background-color: #ffffff ">
+                        <label style="color: black;">
                         Вяртанне на папярэднюю старонку
-                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                         </label>
                     </div>
                 </a>
-            </div>
 {% endblock %}

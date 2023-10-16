@@ -1,30 +1,33 @@
 {% extends "beer_BLR/base.html" %}
+{% load static %}
 
 {% block content %}
-    <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #e3af2b">
-        {{ news.name }}
-    </span>
+    <div class="card" style=" color: lightgoldenrodyellow; width: 35%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+        <h2> {{ news.name }}</h2>
 
-        <div class="list-group" style=" background-color: #72ea82">
+    </div>
+    <br>
+        <div class="card" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; ">
             <h5>Апісанне:</h5>
           <h6>
         {{ news.description }}
-        <br>{{ news.created|date:"d.m.Y H:m" }}
+          <br>
+          <br>{{ news.created|date:"d.m.Y H:m" }}
           </h6>
         </div>
-        <div class="container w-25"style=" background-color: #72ea82">
+    <br>
+        <div class="card" style=" color: lightgoldenrodyellow; width: 25%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; ">
         <h8> Тэгі - {{ news.tags__name }}</h8>
         </div>
-            <div class="container w-50" >
+    <br>
                 <a href="{% url 'all_news' %}">
 
                     <div>
-                        <label style="background-color: #ffffff ">
+                        <label style="color: black;">
                         Вяртанне на папярэднюю старонку
-                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                         </label>
                     </div>
                 </a>
-            </div>
 {% endblock %}

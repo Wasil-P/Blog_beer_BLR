@@ -1,42 +1,53 @@
 {% extends "beer_BLR/base2.html" %}
+{% load static %}
 
 {% block content %}
-    <span class="border border-warning border-4 fs-2 fw-bold" style="background-color: #ecc35e">
-        {{ experience.name }}
-    </span>
-        <div class="border border-success border-2 fs-2 w-50">
-            <h5 style="background-color: #f1de63"> Аўтар - {{ experience.user }}</h5>
-        </div>
-        <div class="border border-success border-2 fs-2 w-50" style="display: inline-block; background-color: #31f562"> Змест:
-        <br><h5>{{ experience.description }}</h5>
-        {% if experience.photo  %}
-        <img src="{{ experience.photo.url }}" style="width:100%;height:auto;">
-        {% endif %}
-        </div>
-                    <a>
-                        <h8 class="card-text" style="float: right; background-color: #dfaaf1" >
-                            Тэгі - {% for tag in experience.tags.all %}{{ tag.name }}{% endfor %}
+    <div class="card" style=" color: lightgoldenrodyellow; width: 35%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+        <h3>{{ experience.name }}</h3>
+    </div>
+    <br>
+         <div class="card" style=" color: lightgoldenrodyellow; width: 45%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; ">
+                    <h5> Аўтар - {{ experience.user }}</h5>
+         </div>
+            <div style="overflow: auto;">
+                 <div class="card" style=" color: lightgoldenrodyellow; float: left; width: 45%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;">
+                        Змест:
+                        <br><h5>{{ experience.description }}</h5>
+
+                 </div>
+            <br>
+                    {% if experience.photo  %}
+                        <div class="card" style=" width: 45%; float: right; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 10px 10px; box-shadow: 8px 8px #247366;">
+                        <img src="{{ experience.photo.url }}" alt="photo" >
+                        </div>
+                    {% endif %}
+
+                <div class="card" style=" color: lightgoldenrodyellow; float: left; width: 35%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+                        <h8>
+                            Тэгі - {% for tag in experience.tags.all %} {{ tag.name }}, {% endfor %}
                         </h8>
-                     </a>
+                </div>
+            </div>
+
+
 
     <div class="container w-50" >
         {% if experience.user == request.user or request.user.is_staff %}
         <a href="{% url "experience_edit" experience.id %}">
             <div>
-                <label style="background-color: #abf6ed ">
+                <label style="color: black;">
                 Рэдагаванне інфармацыі
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Рэдагаваць</button>>
+                <button type="submit" class="btn btn-info" style="margin: 5px 5px; box-shadow: 3px 3px #10420e">Рэдагаваць</button>
                 </label>
             </div>
         </a>
         {% endif %}
         <a href="{% url 'all_experience' %}">
-            <div>
-                <label style="background-color: #abf6ed ">
-                Вяртанне на папярэднюю старонку
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
-                </label>
-            </div>
+            <label style="color: black;">
+            Вяртанне на папярэднюю старонку
+            <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
+
+            </label>
         </a>
     </div>
 {% endblock %}

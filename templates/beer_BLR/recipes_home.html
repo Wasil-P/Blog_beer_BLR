@@ -1,26 +1,27 @@
 {% extends "beer_BLR/base2.html" %}
+{% load static %}
 
-<h5 class="card-title" style="background-color: #e39350 ">Пакрокавыя рэцэпты традыцыйнага піваварэння з дадзенымі</h5>
 {% block content %}
+    <div class="card" style=" width: 75%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;  ">
+    <h5>Пакрокавыя рэцэпты традыцыйнага піваварэння з дадзенымі</h5>
+    </div>
     {% for recipe in all_recipes %}
-        <div class="card" style="width: 18rem;margin: 15px 15px;box-shadow: 8px 8px #205067; background-color: #a89b03">
-          <div class="card-body">
+        <div class="list-group " style=" width: 18rem; margin: 20px; box-shadow: 8px 8px #205067; display: inline-block;">
+          <div class="card-body " style="background-color: #17916f;">
             <h5 class="card-title">{{ recipe.name }}</h5>
             <p class="card-text">{{ recipe.description|truncatechars:30 }}</p>
-            <a href="{% url "recipe_show" recipe.id %}" class="card-link">Падрабязней</a>
+            <a href="{% url "recipe_show" recipe.id %}" class="card-link" style="color: lightgoldenrodyellow;">Падрабязней</a>
           </div>
         </div>
     {% endfor %}
-                <div class="container w-50" >
                 <a href="{% url "home" %}">
 
                     <div>
-                        <label style="background-color: #ffffff ">
+                        <label style="color: black;">
                         Вяртанне на папярэднюю старонку
-                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                         </label>
                     </div>
                 </a>
-            </div>
 {% endblock %}

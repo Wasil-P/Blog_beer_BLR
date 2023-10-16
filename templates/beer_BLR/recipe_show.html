@@ -1,7 +1,8 @@
 {% extends "beer_BLR/base2.html" %}
+{% load static %}
 
 {% block content %}
-    <div class="card w-50" style="width: 18rem;">
+    <div class="card w-50" style="color: lightgoldenrodyellow; width: 18rem;background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;">
       <img src="{{ recipe.photo.url }}" class="card-img-top" style="height: 25%; width: 25%; object-fit: contain">
       <div class="card-body">
         <h5 class="card-title">{{ recipe.name }}</h5>

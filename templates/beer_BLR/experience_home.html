@@ -1,39 +1,44 @@
 {% extends "beer_BLR/base2.html" %}
-
+{% load static %}
 
 {% block content %}
-    <h5 class="card-title" style="background-color: #e39350 ">Эксперыменты варак па традыцыйных рэцэптах карыстальнікаў сайта</h5>
+    <div class="card" style=" width: 75%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;  ">
+    <h3 >Эксперыменты варак па традыцыйных рэцэптах карыстальнікаў сайта</h3>
+    </div>
     {% for experience in all_experience %}
 
-        <div class="list-group w-50" style=" width: 18rem; margin: 20px; box-shadow: 8px 8px #205067">
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="list-group" style=" width: 35%; margin: 20px; box-shadow: 8px 8px #205067; display: inline-block;">
+            <a href="#" class="list-group-item list-group-item-action active" style="background-color: #17916f; " aria-current="true" >
 
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
                     <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
                 </svg> Назва - {{ experience.name }}
                        <br> Аўтар - {{ experience.user}}
-                <a href="{% url "experience_show" experience.id %}" class="btn btn-info" style="box-shadow: 3px 3px #3db733">Падрабязней</a>
+
+                <a href="{% url "experience_show" experience.id %}" class="btn btn-info" style="color: lightgoldenrodyellow; width: 100%; background-color: #205067;">Падрабязней</a>
 
              </a>
         </div>
 
     {% endfor %}
+
     {% if request.user.is_authenticated or request.user.is_staff %}
-    <label style="background-color: #918602 ">
-        Распавесці пра уласную эксперыментальную варку <a href="{% url "create_experience" %}" class="btn btn-info" style="box-shadow: 3px 3px #3db733">Падзяліцца</a>
+        <br>
+    <label style="color: black;">
+        Распавесці пра уласную эксперыментальную варку <a href="{% url "create_experience" %}" class="btn btn-info" style="color: black; box-shadow: 3px 3px #205067">Падзяліцца</a>
     </label>
     {% endif %}
-                <div class="container w-50" >
+
                 <a href="{% url "home" %}">
 
                     <div>
-                        <label style="background-color: #918602 ">
+                        <label style="color: black;">
                         Вяртанне на папярэднюю старонку
-                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #918602">Вярнуцца</button>>
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Вярнуцца</button>
 
                         </label>
                     </div>
                 </a>
-            </div>
+
 {% endblock %}

@@ -1,12 +1,15 @@
 {% extends "beer_BLR/base.html" %}
-
+{% load static %}
 
 {% block content %}
-    <h5 class="card-title" style="background-color: #c07249 ">Гістарычная даведка, якая тычыцца піўных тэхналогій зарэгістраваных на тэрыторыі сучаснай Беларусі</h5>
-    {% for technology in all_technologies %}
+    <div class="card" style=" width: 75%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;  ">
+    <h3>Гістарычная даведка, якая тычыцца піўных тэхналогій зарэгістраваных на тэрыторыі сучаснай Беларусі</h3>
+    </div>
+    <br>
+        {% for technology in all_technologies %}
 
-        <div class="list-group" style="width: 18rem; margin: 20px; box-shadow: 8px 8px #205067; display: inline-block; ">
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        <div class="list-group " style=" width: 18rem; margin: 20px; box-shadow: 8px 8px #205067; display: inline-block;">
+            <a href="#" class="list-group-item list-group-item-action active" style="background-color: #17916f;" aria-current="true">
 
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen" viewBox="0 0 16 16">
@@ -15,21 +18,19 @@
                 </svg> {{ technology.name }}
                 <br>
                  <img src="{{ technology.photo.url }}" class="img-fluid mb-5 rounded" style="height: 200px; width: 200px; object-fit: contain">
-                <a href="{% url "technology_show" technology.id %}" class="btn btn-info" style="width: 18rem; box-shadow: 3px 3px #3db733">Падрабязней</a>
+                <a href="{% url "technology_show" technology.id %}" class="btn btn-info" style="color: lightgoldenrodyellow; width: 18rem; background-color: #205067;">Падрабязней</a>
              </a>
         </div>
 
     {% endfor %}
-            <div class="container w-50" >
                 <a href="{% url "home" %}">
 
                     <div>
-                        <label style="background-color: #ffffff ">
+                        <label style="color: black;">
                         Вяртанне на папярэднюю старонку
-                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                        <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                         </label>
                     </div>
                 </a>
-            </div>
 {% endblock %}

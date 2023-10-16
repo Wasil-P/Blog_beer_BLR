@@ -1,8 +1,9 @@
 {% extends "beer_BLR/base2.html" %}
+{% load static %}
 
 {% block content %}
     {% for about in all_about %}
-    <div class="card w-50" style="width: 18rem;">
+    <div class="card w-50" style="color: lightgoldenrodyellow; width: 18rem;background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;">
       <img src="{{ about.profile_picture.url }}" class="card-img-top"  style="height: 25%; width: 25%; object-fit: contain">
       <div class="card-body">
         <p class="card-text">{{ about.description }}</p>
@@ -10,7 +11,7 @@
           <br>
          <h8 class="card-title"><a href="{{ about.insta }}">Instagram</a></h8>
           <br>
-        <a href="{% url "home" %}" class="btn btn-primary">Вярнуцца</a>
+        <a href="{% url "home" %}" class="btn btn-primary" class="btn btn-info" style="color: lightgoldenrodyellow; background-color: #205067;">Вярнуцца</a>
       </div>
     </div>
     {% endfor %}
