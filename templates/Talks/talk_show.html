@@ -2,39 +2,50 @@
 {% load static %}
 
 {% block content %}
-        <div class="card-text w-25" style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
-        <h3>Катэгорыя - {{ category.name }}</h3>
+        <div class="card" style=" color: lightgoldenrodyellow; width: 25%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+            <h3>Катэгорыя - {{ category.name }}</h3>
         </div>
-    <div class="card-text w-75" style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
-        <h5>{{ talk.question }}</h5>
-        <h6>Дата - {{ talk.created|date:"d.m.Y H:m" }}
         <br>
-        Аўтар - {{ talk.user }}
-        </h6>
-    </div>
+        <div class="card" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'blog/img/card5.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+                <h5>{{ talk.question }}</h5>
+                <h6>{{ talk.created|date:"d.m.Y H:i" }}
+                <br>
+                {{ talk.user }}
+                </h6>
+            {% if talk.user == request.user or request.user.is_staff %}
+                <a href="{% url "talk_edit" category.id talk.id %}">
+                    <div>
+                        <button type="submit" class="btn btn-info" style="color: lightgoldenrodyellow; background-color: #205067; float: right">Рэдагаваць</button>
+                    </div>
+                </a>
+            {% endif %}
+        </div>
 
 
-    {% for message in list_message %}
-        <ol class="list-group list-group-numbered" >
-            <li class="list-group-item w-50" style="margin: 10px; background-image: url('{% static 'Talks/img/card2.jpg' %}');">
-                <h6>{{ message.description }}
+  {% for message in list_message %}
+    {% with counter=forloop.counter0|add:1 %}
+            <li class="list-group-item w-50" style=" color: lightgoldenrodyellow; width: 50%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'Talks/img/card5.jpg' %}'); margin: 0px 100px; box-shadow: 8px 8px #247366; display: inline-block; background-position: center;">
+                <h6>{{ counter }}.
                 <br>
-                {{ message.created|date:"d.m.Y H:m" }}
+                    {{ message.user__username }}:
                 <br>
-                {{ message.user__username }}
+                {{ message.description }}
+                <br>
+                    <div style="float: right">
+                        {{ message.created|date:"d.m.Y H:i" }}
+                    </div>
                 </h6>
             </li>
-        </ol>
-
-    {% endfor %}
+    {% endwith %}
+{% endfor %}
 
 
     {% if request.user.is_authenticated %}
         <a href="{% url 'message_create' category.id talk.id %}">
             <div>
-                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+                <label style="color: black; margin: 20px 0px">
                         Адказаць
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Перайсці</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Перайсці</button>
                 </label>
             </div>
         </a>
@@ -42,9 +53,9 @@
         <a href="{% url 'category_show_talks' category.id %}">
 
             <div >
-                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+                <label style="color: black;">
                 Вяртанне на папярэднюю старонку
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                 </label>
             </div>

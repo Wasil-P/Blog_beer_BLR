@@ -4,16 +4,16 @@
 
 
 {% block content %}
-<div class="container w-50" style="background-color: #94f5a1 ">
+<div class="container w-50" style="background-color: #1bab83 ">
         <form method="post">
 
             {% csrf_token %}
 
             {{form | crispy}}
             <div>
-                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}')">
+                <label style="color: black;">
                     Падцвердзіце уведзены тэкст
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Адправіць</button>>
+                <button type="submit" class="btn btn-info" style=" margin: 10px;box-shadow: 3px 3px #205067">Адправіць</button>
                 </label>
             </div>
         </form>
@@ -21,9 +21,9 @@
         <a href="{% url 'talk_show' category.id talk.id %}">
 
             <div>
-                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}')">
+                <label style="color: black;">
                 Вяртанне на папярэднюю старонку
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                 </label>
             </div>

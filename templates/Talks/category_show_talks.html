@@ -3,14 +3,14 @@
 
 {% block content %}
 
-    <div class="card-text w-25" style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
-        <h3>{{ category.name }}</h3>
+    <div class="card" style=" width: 35%; background-color: #f1b546; background-size: cover; background-image: url('{% static 'Talks/img/card.jpg' %}'); margin: 20px 20px; box-shadow: 8px 8px #247366;  ">
+        <h4>{{ category.name }}</h4>
     </div>
 
     {% for talk in list_talks %}
-        <div class="card mb-4 rounded-3 shadow-sm border-primary w-50" style="background-image: url('{% static 'Menu/hmel.jpg' %}');">
+
             <div class="list-group" style="width: 30rem; margin: 20px; box-shadow: 8px 8px #205067">
-                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="#" class="list-group-item list-group-item-action active" style="background-color: #17916f;" aria-current="true">
                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-question-fill" viewBox="0 0 16 16">
                         <path d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0zm1.602-2.027c.04-.534.198-.815.846-1.26.674-.475 1.05-1.09 1.05-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745.336 0 .504-.24.554-.627z"/>
                         </svg>{{ talk.question }}
@@ -19,17 +19,17 @@
                         <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
                     </svg> {{ talk.message__count }}
                     </h8>
-                    <a href="{% url 'talk_show' category.id talk.id %}" class="btn btn-info" style="box-shadow: 3px 3px #41e5cc">Паглядзець, каментаваць</a>
+                    <a href="{% url 'talk_show' category.id talk.id %}" class="btn btn-info" style="color: lightgoldenrodyellow; width: 100%; background-color: #205067;">Паглядзець, каментаваць</a>
                  </a>
             </div>
-        </div>
+
     {% endfor %}
     {% if request.user.is_authenticated or request.user.is_staff %}
         <a href="{% url 'talk_create' category.id %}">
             <div>
-                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+                <label style="color: black;">
                         Задаць пытанне!
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Перайсці</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #205067">Перайсці</button>
                 </label>
             </div>
         </a>
@@ -37,9 +37,9 @@
         <a href="{% url 'categories_all' %}">
 
             <div >
-                <label style="background-image: url('{% static 'Talks/img/card.jpg' %}');">
+                <label style="color: black;">
                 Вяртанне на папярэднюю старонку
-                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>>
+                <button type="submit" class="btn btn-info" style="box-shadow: 3px 3px #10420e">Вярнуцца</button>
 
                 </label>
             </div>
